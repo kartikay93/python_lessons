@@ -11,23 +11,24 @@ while True:
         print("Invalid input. Please enter a number between 1 and 100.\n")
         break
     
-    if guess == secret_number:
+    elif guess == secret_number:
         print("Congratulations! You guessed the secret number.")
         break
-    elif guess < secret_number and abs(guess - secret_number) > 50:
-        print("Your guess is too low and far from the secret number.")
-    elif guess < secret_number and abs(guess - secret_number) > 25 and abs(guess - secret_number) <=50:
-        print("Your guess is too low but close to the secret number.")
-    elif guess < secret_number and abs(guess - secret_number) <= 25:
-        print("Your guess is too low but very close to the secret number.")
-    elif guess > secret_number and abs(guess - secret_number) > 50:
-        print("Your guess is too high and far from the secret number.")
-    elif guess > secret_number and abs(guess - secret_number) > 25 and abs(guess - secret_number) <=50:
-        print("Your guess is too high but close to the secret number.")
-    elif guess > secret_number and abs(guess - secret_number) <= 25:
-        print("Your guess is too high but very close to the secret number.")
     else:
-        print("Invalid input. Please enter a number between 1 and 100.")
+        direction = "lesser than" if guess < secret_number else "more than"
+
+        diff = abs(guess - secret_number)
+
+        if diff <= 5:
+            distance_hint = "just few counts away from"
+        elif diff <= 25:
+            distance_hint = "tens away from"
+        elif diff <= 50:
+            distance_hint = "quite far from"
+        else:
+            distance_hint = "far more than 50 counts away from"
+
+        print(f"Your guess is {direction} your secret number. Yoe are {distance_hint} the target.")
     
     guess = int(input("Guess again: "))
 
